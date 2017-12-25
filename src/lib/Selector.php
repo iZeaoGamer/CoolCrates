@@ -5,7 +5,7 @@ namespace lib;
 
 /**
  * Class Selector
- * @author Hysland w/ GiantQuartz
+ * @author Hysland w/ ShadowLessMCPE
  * @package lib
  */
 class Selector {
