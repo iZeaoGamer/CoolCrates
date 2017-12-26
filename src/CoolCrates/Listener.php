@@ -2,7 +2,7 @@
 
 namespace CoolCrates;
 
-use pocketmine\event\Listener as PluginListener;
+use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerJoinEvent;
 
