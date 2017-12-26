@@ -1,8 +1,8 @@
 name: CoolCrates
 description: Simple crate plugin
-author: ShadowLessMCPE
-website:
+author: VMPE Development Team
+website: Not showing.
 main: CoolCrates\Loader
 load: POSTWORLD
-version: "1.4"
-api: [1.12.0, 3.0.0-ALPHA7, 3.0.0-ALPHA8, 3.0.0-ALPHA9]
+version: "1.5-B1"
+api: [3.0.0-ALPHA7, 3.0.0-ALPHA8, 3.0.0-ALPHA9, 3.0.0-ALPHA10]
