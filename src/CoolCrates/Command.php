@@ -3,7 +3,7 @@
 namespace CoolCrates;
 
 use CoolCrates\crate\Crate;
-use pocketmine\command\Command as PMCommand;
+use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\level\Position;
 use pocketmine\Player;
@@ -60,19 +60,19 @@ class Command extends PMCommand {
                 case "spawncoord":
                     if(!isset($args[4])) {
                         $sender->sendMessage(TextFormat::RED . "Usage: /crate spawncoord (x) (y) (z) (crate identifier) [level = default]");
-                        return;
+                        return true;
                     }
                     for($i = 1; $i < 4; $i++) {
                         if(!is_numeric($args[$i])) {
                             $sender->sendMessage(TextFormat::RED . "{$args[$i]} is not a valid coordinate!");
-                            return;
+                            return false;
                         }
                         $args[$i] = (int) $args[$i];
                     }
                     $crate = $this->loader->getCrateManager()->getCrate($args[4]);
                     if($crate == null) {
                         $sender->sendMessage(TextFormat::RED . "{$args[4]} is not a valid crate identifier");
-                        return;
+                        return true;
                     }
                     if(isset($args[5])) {
                         $level = $this->loader->getServer()->getLevelByName($args[5]);
@@ -82,6 +82,7 @@ class Command extends PMCommand {
                     }
                     $this->spawnCrate($crate, new Position($args[1], $args[2], $args[3], $level));
                     $sender->sendMessage(TextFormat::GREEN . "Successfully spawn a {$crate->getName()} in {$level->getName()}");
+                    return true;
                     break;
                 case "spawn":
                     if($sender instanceof Player and $sender->isOp()) {
@@ -90,11 +91,14 @@ class Command extends PMCommand {
                             if($crate != null) {
                                 $this->spawnCrate($crate, $sender);
                                 $sender->sendMessage(TextFormat::GREEN . "Successfully spawned a {$crate->getName()}");
+                                return false;
                             } else {
                                 $sender->sendMessage(TextFormat::RED . "{$args[1]} is not a valid crate identifier");
+                                return true;
                             }
                         } else {
                             $sender->sendMessage(TextFormat::RED . "Usage: /crate spawn (crate identifier)");
+                            return true;
                         }
                     }
                     break;
@@ -113,30 +117,39 @@ class Command extends PMCommand {
                                     }
                                     $session->addCrateKey($crate->getIdentifier(), $amount);
                                     $sender->sendMessage(TextFormat::GREEN . "Added " . TextFormat::WHITE . TextFormat::BOLD . $amount . " {$crate->getName()} Key " . TextFormat::RESET . TextFormat::GREEN . "to {$player->getName()} successfully");
+                                    return true;
                                 } else {
                                     $sender->sendMessage(TextFormat::RED . "{$args[2]} is not a valid crate identifier");
+                                    return true;
                                 }
                             } else {
                                 $sender->sendMessage(TextFormat::RED . "{$args[1]} is not a valid player!");
+                                return true;
                             }
                         } else {
                             $sender->sendMessage(TextFormat::RED . "Usage: /crate give (player) (crate identifier) [amount=1]");
+                            return true;
                         }
                     }
                     break;
                 default:
                     if($sender->isOp()) {
                         $sender->sendMessage(TextFormat::RED . "Usage: /crate (spawn/give/wins)");
+                        return true;
                     } else {
                         $sender->sendMessage(TextFormat::RED . "Usage: /crate wins");
+                        return true;
                     }
                     break;
             }
         } else {
             if($sender->isOp()) {
                 $sender->sendMessage(TextFormat::RED . "Usage: /crate (spawn/give/wins)");
+                return true;
+                
             } else {
                 $sender->sendMessage(TextFormat::RED . "Usage: /crate wins");
+                return true;
             }
         }
     }
