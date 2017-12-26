@@ -3,7 +3,7 @@
 namespace CoolCrates;
 
 use CoolCrates\crate\Crate;
-use pocketmine\command\Command;
+use pocketmine\command\Command as PMCommand;
 use pocketmine\command\CommandSender;
 use pocketmine\level\Position;
 use pocketmine\Player;
