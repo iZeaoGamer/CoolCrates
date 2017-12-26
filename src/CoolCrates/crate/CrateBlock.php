@@ -35,7 +35,7 @@ class CrateBlock extends Position {
      * @param int $z
      * @param Level $level
      */
-    public function __construct(Crate $crate, $x, $y, $z, Level $level) {
+    public function __construct(Crate $crate, int $x, int $y, int $z, Level $level) {
         $this->crate = $crate;
         $this->header = new FloatingTextParticle(new Vector3($x + 0.5, $y + 1, $z + 0.5), "", Utils::translateColors($crate->getName()));
         parent::__construct($x, $y, $z, $level);
