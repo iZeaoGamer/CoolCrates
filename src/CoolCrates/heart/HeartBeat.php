@@ -18,7 +18,7 @@ class HeartBeat extends Task {
         $this->heart = $heart;
     }
     
-    public function onRun($currentTick) {
+    public function onRun(int $currentTick) {
         $this->heart->run();
     }
     
