@@ -45,7 +45,7 @@ class Utils {
      * @param Position $position
      * @return string
      */
-    public static function createPositionString(Position $position) {
+    public static function createPositionString(Position $position): string {
         return "{$position->getLevel()->getName()},{$position->getX()},{$position->getY()},{$position->getZ()}";
     }
     /**
@@ -54,7 +54,7 @@ class Utils {
      * @param $string
      * @return null|Position
      */
-    public static function parsePosition($string) {
+    public static function parsePosition($string): Position {
         $array = explode(",", $string);
         if(isset($array[3]) and ($level = Server::getInstance()->getLevelByName($array[0])) != null) {
             return new Position($array[1], $array[2], $array[3], $level);
