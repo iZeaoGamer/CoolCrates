@@ -17,7 +17,7 @@ class CrateFloatingText extends FloatingTextParticle {
      * @param Vector3 $pos
      * @param string $title
      */
-    public function __construct(Crate $crate, Vector3 $pos,$title) {
+    public function __construct(Crate $crate, Vector3 $pos, string $title) {
         $this->crate = $crate;
         parent::__construct($pos, "", $title);
     }
