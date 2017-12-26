@@ -31,7 +31,7 @@ class RemoveCrateTask extends Task {
         $this->player = $player;
     }
     
-    public function onRun($currentTick) {
+    public function onRun(int $currentTick) {
         $this->particle->setInvisible();
         foreach($this->particle->encode() as $packet) {
             $this->player->dataPacket($packet);
