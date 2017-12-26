@@ -78,7 +78,7 @@ class Session {
      * @param string $identifier
      * @return bool
      */
-    public function hasCrateKey(string $identifier) {
+    public function hasCrateKey(string $identifier): bool {
         if(isset($this->crateKeys[$identifier])) {
             return $this->crateKeys[$identifier] > 0;
         } else {
