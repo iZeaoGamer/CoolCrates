@@ -42,6 +42,7 @@ class Command extends PMCommand {
                         $session = $this->loader->getSessionManager()->getSession($sender);
                         if(empty($session->getCrateKeys())) {
                             $sender->sendMessage(TextFormat::RED . "You don't any crate key!");
+                            return true;
                         } else {
                             $sender->sendMessage(Utils::translateColors("{GREEN}You have:"));
                             foreach(($crateKeys = $session->getCrateKeys()) as $key => $crateIdentifier) {
@@ -49,11 +50,13 @@ class Command extends PMCommand {
                                 if($crate != null) {
                                     $sender->sendMessage(TextFormat::GRAY . " - " . TextFormat::WHITE . TextFormat::BOLD . $crateIdentifier . TextFormat::YELLOW . " " .
                                         $crate->getName() . " Keys");
+                                    return true;
                                 }
                             }
                         }
                     } else {
                         $sender->sendMessage("Please, run this command in game");
+                        return true;
                     }
                     break;
                 case "sc":
@@ -72,7 +75,7 @@ class Command extends PMCommand {
                     $crate = $this->loader->getCrateManager()->getCrate($args[4]);
                     if($crate == null) {
                         $sender->sendMessage(TextFormat::RED . "{$args[4]} is not a valid crate identifier");
-                        return true;
+                        return false;
                     }
                     if(isset($args[5])) {
                         $level = $this->loader->getServer()->getLevelByName($args[5]);
@@ -94,7 +97,7 @@ class Command extends PMCommand {
                                 return false;
                             } else {
                                 $sender->sendMessage(TextFormat::RED . "{$args[1]} is not a valid crate identifier");
-                                return true;
+                                return false;
                             }
                         } else {
                             $sender->sendMessage(TextFormat::RED . "Usage: /crate spawn (crate identifier)");
@@ -120,7 +123,7 @@ class Command extends PMCommand {
                                     return true;
                                 } else {
                                     $sender->sendMessage(TextFormat::RED . "{$args[2]} is not a valid crate identifier");
-                                    return true;
+                                    return false;
                                 }
                             } else {
                                 $sender->sendMessage(TextFormat::RED . "{$args[1]} is not a valid player!");
